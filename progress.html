@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Progress</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="script.js" defer></script>
+</head>
+<body>
+<nav>
+<div class="nav-container">
+<a href="index.html">Home</a>
+<a href="about.html">About Us</a>
+<a href="courses.html">Courses</a>
+<a href="certifications.html">Certifications</a>
+<a href="progress.html">Progress</a>
+</div>
+</nav>
+ 
+  <!-- Progress Section -->
+<section class="progress">
+<h2>Your Learning Progress</h2>
+ 
+    <!-- Progress Bar for Course Completion -->
+<div class="progress-bar">
+<label for="courseCompletion">Course Completion:</label>
+<progress id="courseCompletion" value="75" max="100"></progress>
+<span>75% Completed</span>
+</div>
+ 
+    <!-- Progress Bar for Certifications -->
+<div class="progress-bar">
+<label for="certificationCompletion">Certification Completion:</label>
+<progress id="certificationCompletion" value="40" max="100"></progress>
+<span>40% Completed</span>
+</div>
+ 
+    <!-- Course Completion Line Chart -->
+<h3>Courses Completed Over Time (Line Chart)</h3>
+<canvas id="courseLineChart" width="400" height="200"></canvas>
+ 
+    <!-- Certification Progress Pie Chart -->
+<h3>Certifications Earned (Pie Chart)</h3>
+<canvas id="certificationPieChart" width="400" height="200"></canvas>
+ 
+    <!-- Course and Certification Bar Chart -->
+<h3>Courses vs Certifications (Bar Chart)</h3>
+<canvas id="courseCertificationBarChart" width="400" height="200"></canvas>
+</section>
+ 
+  <footer>
+<p>&copy; 2024 Course Platform. All Rights Reserved.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,21 @@
+.about {
+  padding: 50px;
+  text-align: center;
+  background-color: #f9f9f9;
+}
+ 
+.about h2 {
+  font-size: 3rem;
+  margin-bottom: 30px;
+}
+ 
+.about p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+ 
+.about-img {
+  width: 80%;
+  margin-top: 40px;
+  border-radius: 10px;
+}

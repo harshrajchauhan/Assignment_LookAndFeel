@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course Website</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="script.js" defer></script>
+</head>
+<body>
+<!-- Navbar -->
+<nav>
+<div class="nav-container">
+<a href="index.html">Home</a>
+<a href="About.html">About Us</a>
+<a href="courses.html">Courses</a>
+<a href="certifications.html">Certifications</a>
+<a href="progress.html">Progress</a>
+</div>
+</nav>
+ 
+  <!-- Hero Section with background image -->
+<section class="hero">
+<div class="hero-content">
+<h1>Unlock Your Potential</h1>
+<p>Enhance your skills and advance your career with our wide range of online courses.</p>
+<a href="courses.html" class="cta-btn">Start Learning Now</a>
+</div>
+</section>
+ 
+  <!-- Courses Section -->
+<div class="courses">
+<h2>Our Courses</h2>
+<p>Choose from various courses designed to meet your learning goals.</p>
+<div class="course-dropdown">
+<label for="courseSelect">Choose a course:</label>
+<select id="courseSelect">
+<option value="course1">Course 1</option>
+<option value="course2">Course 2</option>
+<option value="course3">Course 3</option>
+</select>
+</div>
+<button onclick="applyFilters()">Apply Filters</button>
+</div>
+ 
+  <!-- Footer -->
+<footer>
+<p>&copy; 2024 Course Platform. All Rights Reserved.</p>
+</footer>
+</body>
+</html>
