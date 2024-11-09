@@ -1,4 +1,3 @@
-<!-- certifications.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,30 +6,48 @@
 <title>Certifications</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<script>
+function showCompletionDate() {
+  const courseDates = {
+    "Python Programming": "Completed on 12/05/2024",
+    "Web Design Fundamentals": "Completed on 11/10/2024",
+    "Data Analysis with R": "Completed on 10/25/2024"
+  };
+  
+  const selectedCourse = document.getElementById("course-select").value;
+  const result = document.getElementById("completion-date");
+ 
+  result.innerText = courseDates[selectedCourse] || "Please select a course to see the completion date.";
+}
+</script>
 </head>
 <body>
 <nav>
-<a href="index.html">Home</a>
-<a href="about.html">About Us</a>
-<a href="courses.html">Courses</a>
-<a href="certifications.html">Certifications</a>
-<a href="progress.html">Progress</a>
+  <a href="index.html">Home</a>
+  <a href="about.html">About Us</a>
+  <a href="courses.html">Courses</a>
+  <a href="certifications.html">Certifications</a>
+  <a href="progress.html">Progress</a>
 </nav>
  
-  <main>
-<h1>Certifications Earned</h1>
-<div class="certifications-list">
-<ul>
-<li>Python Programming - Completed on 12/05/2024</li>
-<li>Web Design Fundamentals - Completed on 11/10/2024</li>
-<li>Data Analysis with R - Completed on 10/25/2024</li>
-</ul>
-</div>
+<main>
+  <h1>Certifications Earned</h1>
+  
+  <!-- Course Selection Dropdown -->
+  <label for="course-select">Select a Course:</label>
+  <select id="course-select" onchange="showCompletionDate()">
+    <option value="">--Choose a Course--</option>
+    <option value="Python Programming">Python Programming</option>
+    <option value="Web Design Fundamentals">Web Design Fundamentals</option>
+    <option value="Data Analysis with R">Data Analysis with R</option>
+  </select>
+ 
+  <!-- Display Completion Date -->
+  <p id="completion-date">Please select a course to see the completion date.</p>
 </main>
  
-  <footer>
-<p>&copy; 2024 E-learning Course Tracker. All rights reserved.</p>
+<footer>
+  <p>&copy; 2024 E-learning Course Tracker. All rights reserved.</p>
 </footer>
 </body>
 </html>
-
