@@ -1,72 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Website</title>
-    
-    <!-- Favicon -->
-    <link rel="icon" href="img/fav.jpg" type="image/jpg">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course Website</title>
+<!-- Favicon -->
+<link rel="icon" href="img/fav.jpg" type="image/jpg">
+ 
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="script.js" defer></script>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav>
-        <div class="nav-container">
-            <a href="index.html">Home</a>
-            <a href="about.html">About Us</a>
-            <a href="courses.html">Courses</a>
-            <a href="certifications.html">Certifications</a>
-            <a href="progress.html">Progress</a>
-        </div>
-    </nav>
-
+<!-- Navbar -->
+<nav>
+<div class="nav-container">
+<a href="index.html">Home</a>
+<a href="about.html">About Us</a>
+<a href="courses.html">Courses</a>
+<a href="certifications.html">Certifications</a>
+<a href="progress.html">Progress</a>
+</div>
+</nav>
+ 
     <!-- Hero Section with background image -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>E-Course Tracker</h1>
-            <p>Enhance your skills and advance your career with our wide range of online courses.</p>
-            <a href="courses.html" class="cta-btn">Start Learning Now</a>
-        </div>
-    </section>
-
+<section class="hero">
+<div class="hero-content">
+<!-- Logo image above the title -->
+<img src="img/fav.jpg" alt="Course Logo" class="hero-logo">
+<h1>E-Course Tracker</h1>
+<p>Enhance your skills and advance your career with our wide range of online courses.</p>
+<a href="courses.html" class="cta-btn">Start Learning Now</a>
+</div>
+</section>
+ 
     <!-- Courses Section -->
-    <div class="courses">
-        <h2>Our Courses</h2>
-        <p>Choose a course to get started.</p>
-        
-        <!-- Dropdown to select a course -->
-        <div class="course-dropdown">
-            <label for="courseSelect">Choose a course:</label>
-            <select id="courseSelect" onchange="applyFilters()">
-                <option value="data-analysis">Data Analysis with R</option>
-                <option value="python-programming">Python Programming</option>
-                <option value="web-design">Web Design Fundamentals</option>
-            </select>
-        </div>
-    </div>
-
+<div class="courses">
+<h2>Our Courses</h2>
+<p>Choose from various courses designed to meet your learning goals.</p>
+<div class="course-dropdown">
+<label for="courseSelect">Choose a course:</label>
+<select id="courseSelect">
+<option value="course1">Data Analysis with R</option>
+<option value="course2">Python Programming</option>
+<option value="course3">Web Design Fundamentals</option>
+</select>
+</div>
+<button onclick="redirectToCourses()">Apply Filters</button>
+</div>
+ 
     <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 Course Platform. All Rights Reserved.</p>
-    </footer>
-
+<footer>
+<p>&copy; 2024 Course Platform. All Rights Reserved.</p>
+</footer>
+ 
     <script>
-        // Function to apply the selected course filter and redirect
-        function applyFilters() {
-            const selectedCourse = document.getElementById('courseSelect').value;
-            let url = 'courses.html';
-            
-            // Append the selected course to the URL to pass it to the courses page
-            if (selectedCourse !== '') {
-                url += `?course=${selectedCourse}`;
-            }
-            
-            // Redirect to the courses page with the selected course
-            window.location.href = url;
+        // Redirect to courses page when 'Apply Filters' is clicked
+        function redirectToCourses() {
+            window.location.href = 'courses.html';
         }
-    </script>
+</script>
 </body>
 </html>
+
