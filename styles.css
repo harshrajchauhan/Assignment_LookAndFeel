@@ -158,3 +158,64 @@ footer p {
     font-size: 14px;
 }
 
+/* Make the team section display images and descriptions in a single line */
+/* Make the team section display images and descriptions in a single line */
+/* Make the team section display images and descriptions in a single line */
+.team {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px; /* Adds space between team members */
+  }
+  
+  /* Each team member section with a fixed width for consistency */
+  .team-member {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 250px; /* Increase width for better spacing */
+    text-align: center;
+    background-color: #f9f9f9; /* Light background color for contrast */
+    padding: 20px; /* Adds padding around the content */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: transform 0.3s ease-in-out; /* Smooth hover effect */
+  }
+  
+  /* Add a hover effect to slightly lift the team member block */
+  .team-member:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* Style the images inside team member section */
+  .team-member-img {
+    width: 150px; /* Set the image width */
+    height: 150px; /* Set the image height */
+    object-fit: cover; /* Ensure images are cropped to fit */
+    border-radius: 50%; /* Make images circular */
+    border: 3px solid #ddd; /* Border around the image */
+    margin-bottom: 15px; /* Space between image and description */
+  }
+  
+  /* Styling for the member description */
+  .member-description {
+    font-size: 14px; /* Adjust font size for better readability */
+    color: #333; /* Darker text for contrast */
+    line-height: 1.6; /* Line height for better text spacing */
+    margin-top: 10px; /* Space between image and text */
+    padding: 0 10px; /* Horizontal padding to avoid text touching edges */
+  }
+  
+  /* Name styling */
+  .member-description strong {
+    font-size: 16px; /* Slightly larger font size for the name */
+    font-weight: 600; /* Bold name */
+    color: #2c3e50; /* Darker color for name */
+    margin-bottom: 5px; /* Space between name and bio */
+  }
+  
+  .data-model-img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+  }
