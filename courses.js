@@ -9,7 +9,7 @@ function applyFilters() {
     { name: 'Data Analysis with R', category: 'Data Analysis', description: 'Learn data analysis and visualization using R programming language.' }
   ];
  
-  const filteredCourses = courses.filter(course => 
+  const filteredCourses = courses.filter(course =>
     (course.name.toLowerCase().includes(courseName.toLowerCase()) || course.category.toLowerCase().includes(category.toLowerCase()))
   );
  
@@ -26,4 +26,7 @@ function applyFilters() {
  
   document.getElementById('course-info').innerHTML = courseInfo;
 }
-
+ 
+ 
+index
+ 
