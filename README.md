@@ -18,15 +18,24 @@ This project is a static prototype for an interactive, data-driven website desig
 
 ## Data Model
 
-Data Model
-The data model consists of the following tables:
+The data model includes the following components:
 
-Users: Stores user information, with one-to-many relationships to courses and modules.
-Courses: A list of courses each user is tracking.
-Login: Stores user login details, establishing a one-to-one relationship with Users.
-Certifications: Lists certifications each user has obtained, connected through a one-to-many relationship with Users.
-Progress: Tracks completion status for each user’s courses, establishing relationships with both Users and Courses.
-This data model is visualized on the "About Us" page. 
+- **Users**: Stores user information, with:
+  - One-to-many relationships to **Courses** and **Progress**.
+  
+- **Courses**: 
+  - A list of courses each user is tracking, with a one-to-many relationship to **Progress**.
+  
+- **Login**:
+  - Stores user login details, establishing a one-to-one relationship with **Users**.
+
+- **Certifications**:
+  - Lists certifications each user has obtained, connected through a one-to-many relationship with **Users**.
+
+- **Progress**:
+  - Tracks completion status for each user’s courses, establishing relationships with both **Users** and **Courses**.
+
+This data model is visualized on the "About Us" page.
 
 ## Technologies
 
