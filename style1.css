@@ -7,6 +7,13 @@ body {
     color: #333;
 }
  
+/* Apply background image only on the homepage */
+.homepage {
+    background-image: url('img/dam.jpg'); /* Add the background image */
+    background-size: cover;
+    background-position: center;
+}
+ 
 /* Navbar Styling */
 nav {
     background-color: #1E3A8A;
@@ -38,19 +45,19 @@ nav a:hover {
     background-color: #2563EB;
     border-radius: 8px;
 }
-/* Hamburger Menu for Mobile */
+ 
 /* Hamburger Menu for Mobile */
 .hamburger {
     display: none;
     font-size: 1.5rem;
     cursor: pointer;
 }
-
+ 
 @media (max-width: 768px) {
     .hamburger {
         display: block;
     }
-
+ 
     .nav-links {
         display: none;
         flex-direction: column;
@@ -59,18 +66,15 @@ nav a:hover {
         background-color: #1E3A8A;
         width: 100%;
     }
-
+ 
     .nav-links.show {
         display: flex;
     }
 }
-/* Hero Section */
-/* Hero Section */
+ 
 /* Hero Section */
 .hero {
-    background-color: lightskyblue;
-    background-size: cover;
-    background-position: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for better text visibility */
     color: white;
     text-align: center;
     padding: 150px 20px;
@@ -78,6 +82,9 @@ nav a:hover {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background-image: url('img/dam.jpg'); /* Background image for hero section */
+    background-size: cover;
+    background-position: center;
 }
  
 .hero-content {
@@ -128,6 +135,7 @@ nav a:hover {
         padding: 10px 20px;
     }
 }
+ 
 
 /* Courses Section */
 .courses {
@@ -230,18 +238,55 @@ button:hover {
     height: auto;
     margin-top: 20px;
 }
-
 /* Courses Section */
-.courses {
+.courses-list {
     padding: 40px;
     text-align: center;
 }
 
-.course-dropdown {
-    margin-top: 20px;
+/* Course Card Container */
+.course-card {
+    display: inline-block;
+    width: 300px;
+    margin: 20px;
+    padding: 20px;
+    background-color: #F3F4F6;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
-button {
+/* Hover effect for Course Card */
+.course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Course Image Styling */
+.course-card img {
+    width: 100%;
+    height: 150px;
+    border-radius: 10px 10px 0 0;
+    object-fit: cover;
+}
+
+/* Course Title */
+.course-card h3 {
+    font-size: 20px;
+    color: #1E3A8A;
+    margin-top: 15px;
+}
+
+/* Course Description */
+.course-card p {
+    color: #4B5563;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Enroll Button Styling */
+.enroll-btn {
     background-color: #1E3A8A;
     color: white;
     padding: 10px 20px;
@@ -249,11 +294,16 @@ button {
     cursor: pointer;
     border-radius: 5px;
     font-size: 16px;
+    margin-top: 15px;
+    width: 100%; /* Full width button */
+    text-align: center;
+    transition: background-color 0.3s;
 }
 
-button:hover {
+.enroll-btn:hover {
     background-color: #2563EB;
 }
+
 
 /* Progress Section */
 .progress {
