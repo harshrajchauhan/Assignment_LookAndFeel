@@ -10,16 +10,6 @@
   <script src="project.js" defer></script>
 </head>
 <body>
-  <!--
-  <nav>
-    <div class="nav-container">
-      <a href="index.html">Home</a>
-      <a href="about.html">About Us</a>
-      <a href="courses.html">Courses</a>
-      <a href="certifications.html">Certifications</a>
-      <a href="progress.html">Progress</a>
-    </div>
-  </nav>-->
   
   <nav>
     <div class="nav-container">
@@ -28,52 +18,49 @@
             <a href="index.html">Home</a>
             <a href="about.html">About Us</a>
             <a href="courses.html">Courses</a>
-            <a href="certifications.html">Certifications</a>
+            <a href="certifications.html">Modules</a>
             <a href="progress.html">Progress</a>
         </div>
     </div>
-</nav>
+  </nav>
 
   <!-- Progress Section -->
   <section class="progress">
-    <h2>Your Learning Progress</h2>
-  
-    <!-- Progress Bar for Course Completion -->
-    <div class="progress-bar">
-      <label for="courseCompletion">Course Completion:</label>
-      <progress id="courseCompletion" value="75" max="100"></progress>
-      <span>75% Completed</span>
+    <h2>Learning Progress</h2>
+
+    <!-- Dropdown to Select Course -->
+    <div class="course-selection">
+      <label for="courseSelect">Select a Course:</label>
+      <select id="courseSelect" onchange="updateProgress()">
+        <option value="">Select a Course</option>
+        <option value="Data Analysis with R">Data Analysis with R</option>
+        <option value="Python Programming">Python Programming</option>
+        <option value="Web Design Fundamentals">Web Design Fundamentals</option>
+      </select>
     </div>
-  
-    <!-- Progress Bar for Certifications -->
-    <div class="progress-bar">
-      <label for="certificationCompletion">Certification Completion:</label>
-      <progress id="certificationCompletion" value="40" max="100"></progress>
-      <span>40% Completed</span>
-    </div>
-  
-    <!-- Charts Section - Flex container for horizontal alignment -->
+
+    <!-- Course Progress Section -->
+    <div id="courseProgress"></div>
+
+    <!-- Charts Section -->
     <div class="chart-container">
-      <!-- Course Completion Line Chart -->
-      <div>
-        <h3>Courses Completed Over Time (Line Chart)</h3>
+      <div id="lineChartContainer">
+        <h3>Course Progress Over Time</h3>
         <canvas id="courseLineChart" width="400" height="300"></canvas>
       </div>
-  
-      <!-- Certification Progress Pie Chart -->
-      <div>
-        <h3>Certifications Earned (Pie Chart)</h3>
-        <canvas id="certificationPieChart" width="400" height="400"></canvas>
+
+      <div id="donutChartContainer">
+        <h3>Total Course Completion</h3>
+        <canvas id="courseDonutChart" width="400" height="300"></canvas>
       </div>
-  
-      <!-- Course and Certification Bar Chart -->
-      <div>
-        <h3>Courses vs Certifications (Bar Chart)</h3>
-        <canvas id="courseCertificationBarChart" width="400" height="300"></canvas>
+
+      <div id="barChartContainer">
+        <h3>Completed vs Remaining Modules</h3>
+        <canvas id="courseBarChart" width="400" height="300"></canvas>
       </div>
     </div>
   </section>
-  
+
   <footer>
     <p>&copy; 2024 Course Platform. All Rights Reserved.</p>
   </footer>

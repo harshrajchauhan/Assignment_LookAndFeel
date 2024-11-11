@@ -1,211 +1,221 @@
-// Combined app.js
-
-// Course data (hardcoded for now)
+// Course data with module details
 let courses = [
-    { name: 'JavaScript Basics', category: 'Programming', progress: 70 },
-    { name: 'Web Design Fundamentals', category: 'Design', progress: 45 },
-  ];
-  
-  // Display courses in list
-  function displayCourses() {
-    const courseList = document.getElementById('courseList');
-    courseList.innerHTML = '';
-    courses.forEach((course, index) => {
-      courseList.innerHTML += `<li>${course.name} - ${course.category} (${course.progress}% completed) 
-  <button onclick="deleteCourse(${index})">Delete</button></li>`;
-    });
+  { 
+      name: 'Data Analysis with R', 
+      progress: 65, 
+      completionHistory: [10, 25, 40, 55, 65],  // Progress over time (monthly)
+      totalProgress: 65,
+      modules: { completed: 4, total: 6 }
+  },
+  { 
+      name: 'Python Programming', 
+      progress: 80, 
+      completionHistory: [20, 35, 50, 65, 80],
+      totalProgress: 80,
+      modules: { completed: 8, total: 10 }
+  },
+  { 
+      name: 'Web Design Fundamentals', 
+      progress: 50, 
+      completionHistory: [5, 20, 35, 45, 50], 
+      totalProgress: 50,
+      modules: { completed: 5, total: 10 }
   }
-  
-  // Add a new course
-  function addCourse() {
-    const courseName = document.getElementById('courseName').value;
-    const courseCategory = document.getElementById('courseCategory').value;
-    if (courseName && courseCategory) {
-      courses.push({ name: courseName, category: courseCategory, progress: 0 });
-      displayCourses();
-      updateCharts();
-    }
-  }
-  
-  // Delete a course
-  function deleteCourse(index) {
-    courses.splice(index, 1);
-    displayCourses();
-    updateCharts();
-  }
-  
-  // Apply filters
-  function applyFilters() {
-    const courseName = document.getElementById('course-name').value;
-    const category = document.getElementById('category').value;
-  
-    const filteredCourses = courses.filter(course =>
-      (course.name.toLowerCase().includes(courseName.toLowerCase()) || course.category.toLowerCase().includes(category.toLowerCase()))
-    );
-  
-    let courseInfo = '';
-    filteredCourses.forEach(course => {
-      courseInfo += `
-        <div class="course-card">
-          <h3>${course.name}</h3>
-          <p><strong>Category:</strong> ${course.category}</p>
-        </div>
+];
+
+let lineChartInstance = null;
+let donutChartInstance = null;
+let barChartInstance = null;
+let moduleBarChartInstance = null;
+
+// Update progress based on selected course
+function updateProgress() {
+  const selectedCourse = document.getElementById('courseSelect').value;
+  const courseProgressSection = document.getElementById('courseProgress');
+  const lineChartContainer = document.getElementById('lineChartContainer');
+  const donutChartContainer = document.getElementById('donutChartContainer');
+  const barChartContainer = document.getElementById('barChartContainer');
+
+  courseProgressSection.innerHTML = '';
+  if (lineChartInstance) lineChartInstance.destroy();
+  if (donutChartInstance) donutChartInstance.destroy();
+  if (barChartInstance) barChartInstance.destroy();
+  if (moduleBarChartInstance) moduleBarChartInstance.destroy();
+
+  if (selectedCourse) {
+      const course = courses.find(c => c.name === selectedCourse);
+
+      // Display course-specific progress bar
+      courseProgressSection.innerHTML = `
+          <div class="progress-bar">
+            <label for="courseCompletion">Course Completion:</label>
+            <progress id="courseCompletion" value="${course.totalProgress}" max="100"></progress>
+            <span>${course.totalProgress}% Completed</span>
+          </div>
       `;
-    });
-  
-    document.getElementById('course-info').innerHTML = courseInfo;
+
+      // Display course-specific charts
+      createLineChart(course.completionHistory);
+      createDonutChart(course.totalProgress);
+      createModuleBarChart(course.modules.completed, course.modules.total);
+      lineChartContainer.style.display = 'block';
+      donutChartContainer.style.display = 'block';
+      barChartContainer.style.display = 'block';
+  } else {
+      // Display overall charts
+      createOverallLineChart();
+      createOverallBarChart();
+      lineChartContainer.style.display = 'block';
+      donutChartContainer.style.display = 'none';
+      barChartContainer.style.display = 'block';
   }
-  
-  // Toggle menu
-  function toggleMenu() {
-    document.querySelector(".nav-links").classList.toggle("show");
-  }
-  
-  // Course and Certification Completion
-  const courseCompletion = 75;
-  const totalCourses = 5;
-  const certificationsEarned = 2;
-  const totalCertifications = 5;
-  const certificationCompletion = (certificationsEarned / totalCertifications) * 100;
-  
-  // Charts
-  let progressChart, completionChart, categoryChart;
-  function createCharts() {
-    // Progress chart
-    const ctxProgress = document.getElementById('progressChart').getContext('2d');
-    progressChart = new Chart(ctxProgress, {
+}
+
+// Line Chart for course or overall courses
+function createLineChart(completionHistory) {
+  const ctx = document.getElementById('courseLineChart').getContext('2d');
+  lineChartInstance = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: courses.map(course => course.name),
-        datasets: [{
-          label: 'Progress',
-          data: courses.map(course => course.progress),
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
-          borderColor: 'rgba(75, 192, 192, 1)',
-          borderWidth: 1
-        }]
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+          datasets: [{
+              label: 'Course Progress',
+              data: completionHistory,
+              borderColor: 'rgba(75, 192, 192, 1)',
+              fill: false
+          }]
+      },
+      options: {
+          responsive: true,
+          scales: {
+              x: { title: { display: true, text: 'Months' }},
+              y: { title: { display: true, text: 'Progress (%)' }}
+          }
       }
-    });
-  
-    // Completion chart
-    const ctxCompletion = document.getElementById('completionChart').getContext('2d');
-    completionChart = new Chart(ctxCompletion, {
+  });
+}
+
+// Donut Chart for selected course completion
+function createDonutChart(progress) {
+  const ctx = document.getElementById('courseDonutChart').getContext('2d');
+  donutChartInstance = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+          labels: ['Completed', 'Remaining'],
+          datasets: [{
+              data: [progress, 100 - progress],
+              backgroundColor: ['#4CAF50', '#FFC107']
+          }]
+      },
+      options: {
+          responsive: true,
+          cutout: '60%'
+      }
+  });
+}
+
+// Bar Chart for modules completed for the selected course
+function createModuleBarChart(completedModules, totalModules) {
+  const ctx = document.getElementById('courseBarChart').getContext('2d');
+  moduleBarChartInstance = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: courses.map(course => course.name),
-        datasets: [{
-          label: 'Completion %',
-          data: courses.map(course => course.progress),
-          backgroundColor: 'rgba(153, 102, 255, 0.2)',
-          borderColor: 'rgba(153, 102, 255, 1)',
-          borderWidth: 1
-        }]
+          labels: ['Modules'],
+          datasets: [
+              {
+                  label: 'Completed Modules',
+                  data: [completedModules],
+                  backgroundColor: '#4CAF50',
+              },
+              {
+                  label: 'Remaining Modules',
+                  data: [totalModules - completedModules],
+                  backgroundColor: '#FFC107',
+              }
+          ]
+      },
+      options: {
+          responsive: true,
+          scales: {
+              y: {
+                  beginAtZero: true,
+                  title: { display: true, text: 'Modules' }
+              }
+          }
       }
-    });
-  
-    // Category chart
-    const ctxCategory = document.getElementById('categoryChart').getContext('2d');
-    categoryChart = new Chart(ctxCategory, {
-      type: 'pie',
+  });
+}
+
+// Overall Line Chart for all courses
+function createOverallLineChart() {
+  const ctx = document.getElementById('courseLineChart').getContext('2d');
+  lineChartInstance = new Chart(ctx, {
+      type: 'line',
       data: {
-        labels: [...new Set(courses.map(course => course.category))],
-        datasets: [{
-          data: [...new Set(courses.map(course => course.category))].map(category =>
-            courses.filter(course => course.category === category).length),
-          backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
-          borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
-          borderWidth: 1
-        }]
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+          datasets: courses.map(course => ({
+              label: course.name,
+              data: course.completionHistory,
+              borderColor: getRandomColor(),
+              fill: false
+          }))
+      },
+      options: {
+          responsive: true,
+          scales: {
+              x: { title: { display: true, text: 'Months' }},
+              y: { title: { display: true, text: 'Progress (%)' }}
+          }
       }
-    });
+  });
+}
+
+// Overall Stacked Bar Chart for course completion percentages
+function createOverallBarChart() {
+  const ctx = document.getElementById('courseBarChart').getContext('2d');
+  barChartInstance = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: courses.map(course => course.name),
+          datasets: [
+              {
+                  label: 'Completed (%)',
+                  data: courses.map(course => course.totalProgress),
+                  backgroundColor: '#4CAF50',
+              },
+              {
+                  label: 'Remaining (%)',
+                  data: courses.map(course => 100 - course.totalProgress),
+                  backgroundColor: '#FFC107',
+              }
+          ]
+      },
+      options: {
+          responsive: true,
+          scales: {
+              y: {
+                  beginAtZero: true,
+                  title: { display: true, text: 'Progress (%)' }
+              }
+          },
+          plugins: {
+              legend: { position: 'top' }
+          }
+      }
+  });
+}
+
+// Generate random color for charts
+function getRandomColor() {
+  const letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
   }
-  
-  function updateCharts() {
-    progressChart.data.labels = courses.map(course => course.name);
-    progressChart.data.datasets[0].data = courses.map(course => course.progress);
-    progressChart.update();
-  
-    completionChart.data.labels = courses.map(course => course.name);
-    completionChart.data.datasets[0].data = courses.map(course => course.progress);
-    completionChart.update();
-  
-    categoryChart.data.labels = [...new Set(courses.map(course => course.category))];
-    categoryChart.data.datasets[0].data = [...new Set(courses.map(course => course.category))].map(category =>
-      courses.filter(course => course.category === category).length);
-    categoryChart.update();
-  }
-  
-  // Line Chart: Courses Completed Over Time
-  const ctxLine = document.getElementById('courseLineChart').getContext('2d');
-  new Chart(ctxLine, {
-    type: 'line',
-    data: {
-      labels: ['January', 'February', 'March', 'April', 'May'],
-      datasets: [{
-        label: 'Courses Completed',
-        data: [15, 30, 50, 60, courseCompletion],
-        borderColor: 'blue',
-        fill: false,
-        tension: 0.1
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: { position: 'top' },
-      },
-      scales: {
-        x: { title: { display: true, text: 'Months' }},
-        y: { title: { display: true, text: 'Courses Completed (%)' }}
-      }
-    }
-  });
-  
-  // Pie Chart: Certifications Earned
-  const ctxPie = document.getElementById('certificationPieChart').getContext('2d');
-  new Chart(ctxPie, {
-    type: 'pie',
-    data: {
-      labels: ['Python Programming', 'Web Design Fundamentals', 'Data Analysis with R'],
-      datasets: [{
-        data: [40, 30, 30],
-        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: { position: 'top' },
-      },
-      cutoutPercentage: 40
-    }
-  });
-  
-  // Bar Chart: Courses vs Certifications
-  const ctxBar = document.getElementById('courseCertificationBarChart').getContext('2d');
-  new Chart(ctxBar, {
-    type: 'bar',
-    data: {
-      labels: ['Courses', 'Certifications'],
-      datasets: [{
-        label: 'Completed (%)',
-        data: [courseCompletion, certificationCompletion],
-        backgroundColor: ['#4CAF50', '#FFC107']
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: { position: 'top' },
-      },
-      scales: {
-        y: { beginAtZero: true, title: { display: true, text: 'Percentage (%)' }},
-        x: { title: { display: true, text: 'Type' }}
-      }
-    }
-  });
-  
-  // Initialize the application
-  displayCourses();
-  createCharts();
-  
+  return color;
+}
+
+// Initialize with overall progress if no course is selected
+document.addEventListener('DOMContentLoaded', () => {
+  updateProgress();
+});

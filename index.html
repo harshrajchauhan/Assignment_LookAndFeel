@@ -7,24 +7,13 @@
 <!-- Favicon -->
 <link rel="icon" href="img/fav.jpg" type="image/jpg">
  
-    <link rel="stylesheet" href="style1.css">
+<link rel="stylesheet" href="style1.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <!--<script src="script.js" defer></script>-->
 <script src="project.js"></script>
 </head>
 <body>
-<!-- Navbar 
-<nav>
-<div class="nav-container">
-<a href="index.html">Home</a>
-<a href="about.html">About Us</a>
-<a href="courses.html">Courses</a>
-<a href="certifications.html">Certifications</a>
-<a href="progress.html">Progress</a>
-</div>
-</nav>
--->
-
+<!-- Navbar -->
 <nav>
     <div class="nav-container">
         <span class="hamburger" onclick="toggleMenu()">&#9776;</span>
@@ -32,49 +21,43 @@
             <a href="index.html">Home</a>
             <a href="about.html">About Us</a>
             <a href="courses.html">Courses</a>
-            <a href="certifications.html">Certifications</a>
+            <a href="certifications.html">Modules</a>
             <a href="progress.html">Progress</a>
         </div>
     </div>
 </nav>
 
- 
-    <!-- Hero Section with background image -->
+<!-- Hero Section with background image -->
 <section class="hero">
-<div class="hero-content">
-<!-- Logo image above the title -->
-<img src="img/fav.jpg" alt="Course Logo" class="hero-logo">
-<h1>E-Course Tracker</h1>
-<p>Enhance your skills and advance your career with our wide range of online courses.</p>
-<a href="courses.html" class="cta-btn">Start Learning Now</a>
-</div>
+    <div class="hero-content">
+        <!-- Logo image above the title -->
+        <img src="img/fav.jpg" alt="Course Logo" class="hero-logo">
+        <h1>E-Course Tracker</h1>
+        <p>Empowering Educators, Simplifying Course Management, Enhancing Learning Outcomes.</p>
+        <a href="courses.html" class="cta-btn">Start Now</a>
+    </div>
 </section>
- 
-    <!-- Courses Section -->
-<div class="courses">
-<h2>Our Courses</h2>
-<p>Choose from various courses designed to meet your learning goals.</p>
-<div class="course-dropdown">
-<label for="courseSelect">Choose a course:</label>
-<select id="courseSelect">
-<option value="course1">Data Analysis with R</option>
-<option value="course2">Python Programming</option>
-<option value="course3">Web Design Fundamentals</option>
-</select>
-</div>
-<button onclick="redirectToCourses()">Apply Filters</button>
-</div>
- 
-    <!-- Footer -->
+
+<!-- Description Section above Footer -->
+<section class="description">
+    <div class="description-content">
+        <h2>About E-Course Tracker</h2>
+        <p>
+            E-Course Tracker is an all-in-one solution designed to help educators efficiently manage courses, track module progress, and streamline student engagement. With user-friendly tools for organizing content and visualizing student achievements, our platform empowers teachers to focus on teaching while making course management seamless and impactful.
+        </p>
+    </div>
+</section>
+
+<!-- Footer -->
 <footer>
-<p>&copy; 2024 Course Platform. All Rights Reserved.</p>
+    <p>&copy; 2024 Course Platform. All Rights Reserved.</p>
 </footer>
- 
-    <script>
-        // Redirect to courses page when 'Apply Filters' is clicked
-        function redirectToCourses() {
-            window.location.href = 'courses.html';
-        }
+
+<script>
+    // Redirect to courses page when 'Apply Filters' is clicked
+    function redirectToCourses() {
+        window.location.href = 'courses.html';
+    }
 </script>
 </body>
 </html>
