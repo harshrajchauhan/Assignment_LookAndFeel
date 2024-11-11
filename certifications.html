@@ -7,7 +7,7 @@
   <!-- Favicon -->
   <link rel="icon" href="img/fav.jpg" type="image/jpg">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="style1.css">
 <script>
 function showCompletionDate() {
   const courseDates = {
@@ -22,17 +22,21 @@ function showCompletionDate() {
   result.innerText = courseDates[selectedCourse] || "Please select a course to see the completion date.";
 }
 </script>
+<script src="project.js"></script>
 </head>
 <body>
   <nav>
     <div class="nav-container">
-      <a href="index.html">Home</a>
-      <a href="about.html">About Us</a>
-      <a href="courses.html">Courses</a>
-      <a href="certifications.html">Certifications</a>
-      <a href="progress.html">Progress</a>
+        <span class="hamburger" onclick="toggleMenu()">&#9776;</span>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="courses.html">Courses</a>
+            <a href="certifications.html">Certifications</a>
+            <a href="progress.html">Progress</a>
+        </div>
     </div>
-  </nav>
+</nav>
  
 <main>
   <h1>Certifications Earned</h1>
