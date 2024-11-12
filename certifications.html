@@ -160,7 +160,18 @@
     const moduleForm = document.getElementById('moduleForm');
     const moduleList = document.getElementById('moduleList');
     let modules = [];
- 
+
+    // Initialize the courses with a basic module for each
+    function initializeCourses() {
+      const defaultModules = [
+        { course: "Data Analysis with R", name: "Introduction to R", description: "Basic module covering the basics of R programming." },
+        { course: "Python Programming", name: "Introduction to Python", description: "Basic module covering the basics of Python programming." },
+        { course: "Web Design Fundamentals", name: "HTML and CSS Basics", description: "Basic module covering the basics of HTML and CSS." }
+      ];
+      
+      defaultModules.forEach(module => createModule(module.course, module.name, module.description));
+    }
+
     // Function to create a module and display it
     function createModule(course, name, description) {
       const module = {
@@ -172,7 +183,7 @@
       modules.push(module);
       displayModules();
     }
- 
+
     // Function to display all modules
     function displayModules() {
       moduleList.innerHTML = `<h3>Existing Modules</h3>`; // Reset the module list
@@ -189,13 +200,13 @@
         moduleList.appendChild(moduleCard);
       });
     }
- 
+
     // Function to delete a module
     function deleteModule(id) {
       modules = modules.filter(module => module.id !== id);
       displayModules();
     }
- 
+
     // Function to edit a module
     function editModule(id) {
       const module = modules.find(module => module.id === id);
@@ -211,7 +222,7 @@
         };
       }
     }
- 
+
     // Function to update a module
     function updateModule(id) {
       const course = document.getElementById('courseName').value;
@@ -230,7 +241,7 @@
         };
       }
     }
- 
+
     // Handle form submit
     moduleForm.onsubmit = function(e) {
       e.preventDefault();
@@ -238,9 +249,12 @@
       const name = document.getElementById('moduleName').value;
       const description = document.getElementById('moduleDescription').value;
       createModule(course, name, description);
-      moduleForm.reset(); // Clear form after submit
+      moduleForm.reset(); // Reset form fields
     };
+
+    // Initialize default modules
+    initializeCourses();
   </script>
- 
+
 </body>
 </html>

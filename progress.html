@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Progress</title>
+  <title>Course and Module Management</title>
   <link rel="icon" href="img/fav.jpg" type="image/jpg">
   <link rel="stylesheet" href="style1.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="project.js" defer></script>
 </head>
 <body>
   
@@ -24,39 +23,38 @@
     </div>
   </nav>
 
-  <!-- Progress Section -->
+  <!-- Course and Module Management Progress Section -->
   <section class="progress">
-    <h2>Learning Progress</h2>
+    <h2>Instructor Course and Module Management</h2>
 
     <!-- Dropdown to Select Course -->
     <div class="course-selection">
-      <label for="courseSelect">Select a Course:</label>
+      <label for="courseSelect">Select a Course to Manage:</label>
       <select id="courseSelect" onchange="updateProgress()">
-        <option value="">Select a Course</option>
+        <option value="">View All Courses</option>
         <option value="Data Analysis with R">Data Analysis with R</option>
         <option value="Python Programming">Python Programming</option>
         <option value="Web Design Fundamentals">Web Design Fundamentals</option>
       </select>
     </div>
 
-    <!-- Course Progress Section -->
-    <div id="courseProgress"></div>
+    
 
     <!-- Charts Section -->
     <div class="chart-container">
-      <div id="lineChartContainer">
-        <h3>Course Progress Over Time</h3>
-        <canvas id="courseLineChart" width="400" height="300"></canvas>
+      <div id="courseCountContainer">
+        <h3>Total Number of Courses Created</h3>
+        <canvas id="courseCountChart" width="400" height="300"></canvas>
       </div>
 
-      <div id="donutChartContainer">
-        <h3>Total Course Completion</h3>
-        <canvas id="courseDonutChart" width="400" height="300"></canvas>
+      <div id="moduleCountContainer">
+        <h3>Modules Created for Each Course</h3>
+        <canvas id="moduleCountChart" width="400" height="300"></canvas>
       </div>
 
-      <div id="barChartContainer">
-        <h3>Completed vs Remaining Modules</h3>
-        <canvas id="courseBarChart" width="400" height="300"></canvas>
+      <div id="overTimeContainer">
+        <h3>Modules and Courses Added Over Time</h3>
+        <canvas id="overTimeChart" width="400" height="300"></canvas>
       </div>
     </div>
   </section>
@@ -64,5 +62,135 @@
   <footer>
     <p>&copy; 2024 Course Platform. All Rights Reserved.</p>
   </footer>
+
+  <script>
+    // Sample data for courses and modules created over time
+    const courseData = {
+      "Data Analysis with R": {
+        modules: 3,
+        creationDate: "2024-01-15"
+      },
+      "Python Programming": {
+        modules: 5,
+        creationDate: "2024-02-20"
+      },
+      "Web Design Fundamentals": {
+        modules: 4,
+        creationDate: "2024-03-10"
+      },
+    };
+
+    // Data for tracking how many modules and courses were added over time
+    const timeData = {
+      "2024-01-15": { courses: 1, modules: 3 },
+      "2024-02-20": { courses: 2, modules: 8 },
+      "2024-03-10": { courses: 3, modules: 12 },
+    };
+
+    // Global chart instances for easy access
+    let courseCountChart, moduleCountChart, overTimeChart;
+
+    // Function to update the progress charts based on selected course
+    function updateProgress() {
+      const selectedCourse = document.getElementById('courseSelect').value;
+
+      if (selectedCourse) {
+        // Update charts for the selected course
+        const data = courseData[selectedCourse];
+        updateModuleCountChart([selectedCourse], [data.modules]);
+      } else {
+        // Update charts for all courses
+        updateCourseCountChart();
+        updateModuleCountChartForAllCourses();
+        updateOverTimeChart();
+      }
+    }
+
+    // Function to update the Total Number of Courses Created chart
+    function updateCourseCountChart() {
+      const ctx = document.getElementById('courseCountChart').getContext('2d');
+      
+      // Destroy the previous chart if it exists
+      if (courseCountChart) courseCountChart.destroy();
+
+      // Create the chart
+      courseCountChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Total Courses Created'],
+          datasets: [{
+            label: 'Number of Courses',
+            data: [Object.keys(courseData).length],
+            backgroundColor: '#4CAF50',
+            borderColor: '#4CAF50',
+            borderWidth: 1
+          }]
+        }
+      });
+    }
+
+    // Function to update Modules Created for Each Course chart
+    function updateModuleCountChart(courseNames = Object.keys(courseData), modules = Object.values(courseData).map(course => course.modules)) {
+      const ctx = document.getElementById('moduleCountChart').getContext('2d');
+
+      // Destroy the previous chart if it exists
+      if (moduleCountChart) moduleCountChart.destroy();
+
+      // Create the chart
+      moduleCountChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: courseNames,
+          datasets: [{
+            label: 'Modules Created',
+            data: modules,
+            backgroundColor: '#FFC107',
+            borderColor: '#FFC107',
+            borderWidth: 1
+          }]
+        }
+      });
+    }
+
+    // Function to update Modules Created for All Courses chart
+    function updateModuleCountChartForAllCourses() {
+      const courseNames = Object.keys(courseData);
+      const modules = Object.values(courseData).map(course => course.modules);
+      updateModuleCountChart(courseNames, modules);
+    }
+
+    // Function to update Modules and Courses Added Over Time chart
+    function updateOverTimeChart() {
+      const ctx = document.getElementById('overTimeChart').getContext('2d');
+
+      // Destroy the previous chart if it exists
+      if (overTimeChart) overTimeChart.destroy();
+
+      // Create the chart
+      overTimeChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: Object.keys(timeData),
+          datasets: [{
+            label: 'Courses Added',
+            data: Object.values(timeData).map(item => item.courses),
+            borderColor: 'rgba(75, 192, 192, 1)',
+            fill: false
+          },
+          {
+            label: 'Modules Added',
+            data: Object.values(timeData).map(item => item.modules),
+            borderColor: 'rgba(255, 99, 132, 1)',
+            fill: false
+          }]
+        }
+      });
+    }
+
+    // Initialize with default selection (show all courses)
+    document.addEventListener('DOMContentLoaded', () => {
+      updateProgress();
+    });
+  </script>
 </body>
 </html>
